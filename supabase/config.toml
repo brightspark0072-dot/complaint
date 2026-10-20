@@ -1,0 +1,31 @@
+# Local Supabase CLI configuration. Hosted projects are configured in the dashboard — mirror these settings there.
+# NOTE: key names follow the Supabase CLI config schema as of writing; verify against `supabase init` output for your CLI version.
+project_id = "complaint-com"
+
+[auth]
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://localhost:5173/sign-in", "http://localhost:5173/reset-password", "http://localhost:5173/staff/sign-in"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = true
+minimum_password_length = 10
+password_requirements = "letters_digits"
+
+[auth.email]
+enable_signup = true
+enable_confirmations = true      # email must be verified before sign-in
+double_confirm_changes = true
+secure_password_change = true
+
+[auth.rate_limit]
+email_sent = 4                   # per hour
+sign_in_sign_ups = 30            # per 5 min per IP
+token_refresh = 150
+token_verifications = 30
+
+[functions.invite-handler]
+verify_jwt = true
+
+[functions.set-user-suspended]
+verify_jwt = true
